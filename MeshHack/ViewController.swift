@@ -35,8 +35,9 @@ class ViewController: NSViewController, CBCentralManagerDelegate {
         case .poweredOn:
             print("state: poweredOn")
 
-            // スキャンを開始
-            self.centralManager?.scanForPeripherals(withServices: nil, options: nil)
+            // LEDタグ（ serviceのUUID = 72C90001-57A9-4D40-B746-534E22EC9F9E ）のスキャンを開始
+            let service = CBUUID(string: "72C90001-57A9-4D40-B746-534E22EC9F9E")
+            self.centralManager?.scanForPeripherals(withServices: [service], options: nil)
 
         case .resetting:
             print("state: resetting")
