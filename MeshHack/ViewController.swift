@@ -63,10 +63,11 @@ class ViewController: NSViewController, CBCentralManagerDelegate {
     }
 
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
-        // 接続成功
-
         print("接続成功: \(peripheral)")
+    }
 
+    func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
+        print("接続失敗...: \(peripheral)")
     }
 }
 
