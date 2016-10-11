@@ -11,6 +11,7 @@ import CoreBluetooth
 
 class ViewController: NSViewController, CBCentralManagerDelegate {
     var centralManager: CBCentralManager?
+    var peripheral: CBPeripheral?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +54,19 @@ class ViewController: NSViewController, CBCentralManagerDelegate {
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
 
         print("発見したBLEデバイス: \(peripheral)")
+
+        // ペリフェラルがメモリから開放されないよう、インスタンス変数へ保持しておく
+        self.peripheral = peripheral
+
+        // 接続開始
+        self.centralManager?.connect(peripheral, options: nil)
+    }
+
+    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        // 接続成功
+
+        print("接続成功: \(peripheral)")
+
     }
 }
 
