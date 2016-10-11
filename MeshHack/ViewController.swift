@@ -34,6 +34,10 @@ class ViewController: NSViewController, CBCentralManagerDelegate {
             print("state: poweredOff")
         case .poweredOn:
             print("state: poweredOn")
+
+            // スキャンを開始
+            self.centralManager?.scanForPeripherals(withServices: nil, options: nil)
+
         case .resetting:
             print("state: resetting")
         case .unauthorized:
@@ -43,6 +47,11 @@ class ViewController: NSViewController, CBCentralManagerDelegate {
         case .unsupported:
             print("state: unsupported")
         }
+    }
+
+    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+
+        print("発見したBLEデバイス: \(peripheral)")
     }
 }
 
